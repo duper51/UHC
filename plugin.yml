@@ -1,0 +1,11 @@
+author: Leon Hartley
+description: An awesome UHC game
+main: com.leonhartley.uhc.UHC
+name: UHC
+version: '1.0'
+
+commands:
+   startgame:
+      description: Starts the game
+      usage: /<command>
+      aliases: [startthefuckinggame, cuminmyeye]
