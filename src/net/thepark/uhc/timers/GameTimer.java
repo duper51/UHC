@@ -1,14 +1,15 @@
-package com.leonhartley.uhc.timers;
+package net.thepark.uhc.timers;
 
 import java.util.concurrent.TimeUnit;
+
+import net.thepark.uhc.UHC;
+import net.thepark.uhc.utils.GameState;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 
-import com.leonhartley.uhc.UHC;
-import com.leonhartley.uhc.utils.GameState;
 
 public class GameTimer implements Runnable {
 	private Server server;
@@ -19,10 +20,12 @@ public class GameTimer implements Runnable {
 	@Override
 	public void run() {
 		try {
-			while(UHC.hasStarted() == false) {
-				Thread.sleep(0);
+			int playercount = 0;
+			while(UHC.hasStarted() == false || playercount < 2) {
+				Player playerlist[] = server.getOnlinePlayers();
+				playercount = playerlist.length;
+				Thread.sleep(1000);
 			}
-			
 			int max = 450;
 			int min = -450;
 			
@@ -30,8 +33,8 @@ public class GameTimer implements Runnable {
 				player.teleport(UHC.generateRandomLocation(min, max, player, false));
 			}
 			
-			TimeUnit.SECONDS.sleep(10);
-			
+			Bukkit.broadcastMessage(ChatColor.RED + "90 Seconds until the match starts.");
+			TimeUnit.SECONDS.sleep(70);
 			Bukkit.broadcastMessage(ChatColor.RED + "" + "Your health and hunger has been reset.");
 			TimeUnit.SECONDS.sleep(5);
 			
@@ -121,22 +124,23 @@ public class GameTimer implements Runnable {
 				if(server.getOnlinePlayers().length == 1) {
 					
 					for(Player player : server.getOnlinePlayers()) {
-						player.sendMessage(player.getName().toUpperCase() + " IS THE WINNER!!");
+						player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "You have won UHC, adding your stats, and restarting in 10 seconds!");
 						
 						for(int i = 0; i < 1000; i++) {
 							player.giveExpLevels(i);
 							Thread.sleep(100);
 						}
 						
-						TimeUnit.SECONDS.sleep(30);
+						TimeUnit.SECONDS.sleep(10);
 						
 						player.kickPlayer("The game is now restarting!");
-						Bukkit.reload();
+						
+						Bukkit.shutdown();
 					}
 				}
 				
-				if(server.getOnlinePlayers().length == 2 && battleBegun != true) {
-					Bukkit.broadcastMessage(ChatColor.WHITE + "In 2 minutes, both players will be teleported within 50 blocks of the center of the map!");
+				if(server.getOnlinePlayers().length == 4 && battleBegun != true) {
+					Bukkit.broadcastMessage(ChatColor.WHITE + "In 2 minutes, all players will be teleported within 50 blocks of the center of the map!");
 					TimeUnit.SECONDS.sleep(90);
 					
 					Bukkit.broadcastMessage(ChatColor.RED + "30 seconds left until the final battle begins!");

@@ -1,11 +1,15 @@
-author: Leon Hartley
-description: An awesome UHC game
-main: com.leonhartley.uhc.UHC
-name: UHC
-version: '1.0'
+author: ThePark Staff
+description: UHC for ThePark
+main: net.thepark.uhc.UHC
+name: UltraHardcore
+version: '0.1'
 
 commands:
-   startgame:
-      description: Starts the game
+   uhc:
+      description: Main UHC command
       usage: /<command>
-      aliases: [startthefuckinggame, cuminmyeye]
+      aliases: []
+   startgame:
+      description: Starts the UHC game
+      usage: /uhc startgame
+      aliases: []

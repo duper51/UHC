@@ -1,4 +1,4 @@
-package com.leonhartley.uhc.utils;
+package net.thepark.uhc.utils;
 
 public enum GameState {
 	IDLE (-1),

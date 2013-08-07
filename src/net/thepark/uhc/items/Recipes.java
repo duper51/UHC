@@ -1,4 +1,4 @@
-package com.leonhartley.uhc.items;
+package net.thepark.uhc.items;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionType;
 
-public class Recipies {
+public class Recipes {
 	public static ShapedRecipe goldenApple() {
 		ShapedRecipe apple = new ShapedRecipe(new ItemStack(Material.GOLDEN_APPLE, 1));
 		apple.shape("GGG", "GAG", "GGG");

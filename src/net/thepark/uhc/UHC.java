@@ -1,4 +1,11 @@
-package com.leonhartley.uhc;
+package net.thepark.uhc;
+
+import net.thepark.uhc.items.Recipes;
+import net.thepark.uhc.listeners.CommandListener;
+import net.thepark.uhc.listeners.PlayerListener;
+import net.thepark.uhc.listeners.ServerListener;
+import net.thepark.uhc.timers.GameTimer;
+import net.thepark.uhc.utils.GameState;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -10,12 +17,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.leonhartley.uhc.listeners.CommandListener;
-import com.leonhartley.uhc.listeners.ServerListener;
-import com.leonhartley.uhc.utils.GameState;
-import com.leonhartley.uhc.listeners.PlayerListener;
-import com.leonhartley.uhc.items.Recipies;
-import com.leonhartley.uhc.timers.GameTimer;
 
 public class UHC extends JavaPlugin {
 	private static GameState state;
@@ -40,11 +41,11 @@ public class UHC extends JavaPlugin {
 		
 		getServer().getRecipesFor(new ItemStack(Material.GOLDEN_APPLE, 1));
 		
-		getServer().addRecipe(Recipies.goldenApple());
-		getServer().addRecipe(Recipies.healthPotion());
-		getServer().addRecipe(Recipies.compass());
+		getServer().addRecipe(Recipes.goldenApple());
+		getServer().addRecipe(Recipes.healthPotion());
+		getServer().addRecipe(Recipes.compass());
 		
-		getCommand("startgame").setExecutor(new CommandListener());
+		getCommand("uhc").setExecutor(new CommandListener());
 		
 		Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
 		Bukkit.getPluginManager().registerEvents(new ServerListener(), this);
@@ -62,7 +63,6 @@ public class UHC extends JavaPlugin {
 	public static void startGame() {
 		UHC.started = true;
 		UHC.setState(GameState.STARTING);
-		
 		Bukkit.broadcastMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "UHC is about to start, ready yourself!");
 	}
 	
